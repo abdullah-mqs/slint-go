@@ -37,7 +37,7 @@ func main() {
 		return "playing"
 	})
 
-	// 1) Pehle UI load
+	// 1) First UI load
 	if err := b.LoadUI(findFile("ui/app.slint")); err != nil {
 		log.Fatal(err)
 	}
