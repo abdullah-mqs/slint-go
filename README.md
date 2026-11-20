@@ -1,4 +1,4 @@
-# Jani App — Go + C++ + Slint
+# App — Go + C++ + Slint
 
 > **Logic in Go, Design in Slint, Bridge in C++.**
 > Build the bridge once, then never touch it again. After that, work only in Go and Slint.
