@@ -1,0 +1,27 @@
+# Build outputs
+build/
+dist/
+build.log
+
+# Compiled libs / binaries
+*.so
+*.dll
+*.exe
+*.dylib
+*.a
+*.o
+
+# Go build cache / binary
+go/app
+go/*.exe
+
+# OS / Editor files
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+.zed/
+
+# Temp
+*.log
+*.tmp

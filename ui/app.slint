@@ -1,0 +1,121 @@
+import { Button, VerticalBox, LineEdit } from "std-widgets.slint";
+
+export struct Player {
+    name: string,
+    score: int,
+    tint: color,
+}
+
+export component App inherits Window {
+    title: "Slint + Go + C++";
+    width: 520px;
+    height: 620px;
+    background: bg-color;
+
+    in-out property <string> my-data: "Hello!";
+    in property <int> count: 0;
+    in property <bool> is-loading: false;
+    in property <float> progress: 0.0;
+    in property <color> bg-color: #1a1a1a;
+    in property <image> avatar;
+
+    // Naye types
+    in property <[string]> names: [];
+    in property <[int]> scores: [];
+    in property <[float]> weights: [];
+    in property <Player> player: { name: "", score: 0, tint: #000000 };
+    in property <string> mode: "alpha";
+
+    callback do-work(string) -> string;
+    callback load-file(string) -> string;
+    callback open-video(string) -> string;
+
+    VerticalBox {
+        spacing: 10px;
+        padding: 20px;
+
+        Text {
+            text: my-data;
+            color: white;
+            font-size: 20px;
+            wrap: word-wrap;
+        }
+
+        Text {
+            text: "Count: \{count}";
+            color: #aaaaaa;
+        }
+
+        input := LineEdit {
+            placeholder-text: "Kuch likho jani...";
+        }
+
+        HorizontalLayout {
+            spacing: 10px;
+            Button {
+                text: "Do Work";
+                clicked => { root.my-data = root.do-work(input.text); }
+            }
+
+            Button {
+                text: "Video OS Player me chalao";
+                clicked => { root.open-video("https://www.youtube.com/watch?v=dQw4w9WgXcQ"); }
+            }
+        }
+
+        // Array: names
+        Text {
+            text: "Names:";
+            color: #ffcc66;
+        }
+
+        HorizontalLayout {
+            spacing: 8px;
+            for name in names: Text {
+                text: name;
+                color: white;
+            }
+        }
+
+        // Array: scores
+        HorizontalLayout {
+            spacing: 8px;
+            for score in scores: Text {
+                text: "\{score}";
+                color: #66ccff;
+            }
+        }
+
+        // Array: weights (float)
+        HorizontalLayout {
+            spacing: 8px;
+            for w in weights: Text {
+                text: "\{w}";
+                color: #99ff99;
+            }
+        }
+
+        // Struct: player
+        Rectangle {
+            height: 50px;
+            background: player.tint;
+            border-radius: 6px;
+            Text {
+                text: "\{player.name} - \{player.score}";
+                color: white;
+                font-size: 18px;
+            }
+        }
+
+        // Enum (string): mode
+        Text {
+            text: mode == "alpha" ? "Mode: Alpha" : (mode == "beta" ? "Mode: Beta" : "Mode: Gamma");
+            color: #ff99cc;
+        }
+
+        Text {
+            text: is-loading ? "Loading..." : "Ready hai jani";
+            color: is-loading ? yellow : green;
+        }
+    }
+}
